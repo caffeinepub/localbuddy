@@ -1,0 +1,120 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-06T15:55:45.220Z",
+  "summary": "Diff adds a TanStack Router-based IA with routes for landing/customer/vendor, customer browsing UI with OSM/Leaflet map + list + search/filter and vendor detail sheet, vendor dashboard with profile/menu/location editors, and React Query hooks/mutations to talk to a new Motoko backend actor that stores user/vendor data and menu items. However, several required vendor/profile fields (category, hours, price range) and backend stable storage are not evidenced in the diff; brand assets and landing page content are also not evidenced in the provided file set.",
+  "missing_requirements": [
+    {
+      "id": "REQ-3",
+      "requirement": "Vendor portal provides a form to create/update vendor profile fields (at minimum: name, description, food category, hours, price range).",
+      "reason": "VendorProfileForm only includes name, description, and phone; no fields for food category, hours, or price range are shown. Backend VendorProfile type also lacks these fields, so they cannot be persisted.",
+      "evidence": [
+        "frontend/src/components/vendor/VendorProfileForm.tsx",
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "requirement": "Vendor detail panels include vendor info, menu items, price range, and hours (and directions link).",
+      "reason": "VendorDetailPanel shows description, phone, coordinates, directions link, and menu items, but no hours or price range fields are present in the UI or backend type.",
+      "evidence": [
+        "frontend/src/components/customer/VendorDetailPanel.tsx",
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "requirement": "Backend stores data stably so it remains after canister upgrade (use stable storage patterns as needed).",
+      "reason": "backend/main.mo shows in-memory Maps and a var nextMenuItemId, but no stable variables or preupgrade/postupgrade patterns are evidenced in the provided truncated file.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "requirement": "Generated images exist under frontend/public/assets/generated (logo and hero illustration) and are referenced by the landing page UI.",
+      "reason": "Logo is referenced in AppLayout, but the diff summary does not show the actual image files under frontend/public/assets/generated, nor does it show LandingPage referencing both the logo and the hero illustration.",
+      "evidence": [
+        "frontend/src/components/AppLayout.tsx",
+        "frontend/src/App.tsx"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "User profile management and vendor access gating (AuthGate/VendorGate, ProfileSetupModal, userProfiles in backend).",
+      "reason": "BuildRequest focuses on customer/vendor portals and vendor CRUD; it does not request separate user profile creation or a vendor-role authorization gate/UI flow.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/components/auth/AuthGate.tsx",
+        "frontend/src/components/auth/VendorGate.tsx",
+        "frontend/src/components/auth/ProfileSetupModal.tsx",
+        "frontend/src/hooks/queries/useAuthProfile.ts",
+        "frontend/src/hooks/mutations/useAuthMutations.ts"
+      ]
+    },
+    {
+      "description": "Authorization/AccessControl mixin and permission checks in backend for profile/vendor mutations.",
+      "reason": "BuildRequest does not specify adding an authorization framework beyond using Internet Identity for login; these specific AccessControl modules and permission model are additional scope.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "description": "Vendor \"trustedBy\" social/trust list field.",
+      "reason": "Not requested in vendor profile requirements (requested: name, description, food category, hours, price range, location; plus menu CRUD).",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/components/vendor/VendorProfileForm.tsx"
+      ]
+    },
+    {
+      "description": "Vendor phone number as a first-class profile field shown to customers.",
+      "reason": "Not requested as part of required vendor profile fields or customer detail requirements.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/components/vendor/VendorProfileForm.tsx",
+        "frontend/src/components/customer/VendorDetailPanel.tsx",
+        "frontend/src/components/customer/VendorList.tsx"
+      ]
+    }
+  ],
+  "confidence": 0.74,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/AppLayout.tsx",
+    "frontend/src/components/auth/AuthGate.tsx",
+    "frontend/src/components/auth/ProfileSetupModal.tsx",
+    "frontend/src/components/auth/VendorGate.tsx",
+    "frontend/src/components/customer/CustomerBrowseView.tsx",
+    "frontend/src/components/customer/VendorDetailPanel.tsx",
+    "frontend/src/components/customer/VendorList.tsx",
+    "frontend/src/components/map/OsmVendorMap.tsx",
+    "frontend/src/components/states/EmptyState.tsx",
+    "frontend/src/components/states/ErrorState.tsx",
+    "frontend/src/components/states/LoadingState.tsx",
+    "frontend/src/components/vendor/LocationPicker.tsx",
+    "frontend/src/components/vendor/MenuItemsEditor.tsx",
+    "frontend/src/components/vendor/VendorDashboard.tsx",
+    "frontend/src/components/vendor/VendorProfileForm.tsx",
+    "frontend/src/hooks/mutations/useAuthMutations.ts",
+    "frontend/src/hooks/mutations/useVendorMutations.ts",
+    "frontend/src/hooks/queries/useAuthProfile.ts",
+    "frontend/src/hooks/queries/useVendors.ts",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/index.css",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/CustomerPortalPage.tsx",
+    "frontend/src/pages/LandingPage.tsx",
+    "frontend/src/pages/VendorPortalPage.tsx",
+    "frontend/src/utils/urlParams.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-create-a-localbuddy-frontend-information-architecture-with-two-clear-entry-points-1-customer-user-portal-and-2-vendor-portal-including-a-simple-landing-page-that-explains-the-service-and-routes-users-into-the-correct-portal",
+      "featureTitle": "Create a LocalBuddy frontend information architecture with two clear entry points: (1) Customer/User portal and (2) Vendor portal, including a simple landing page that explains the service and routes users into the correct portal.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/AppLayout.tsx",
+        "frontend/src/components/auth/AuthGate.tsx",
+        "frontend/src/pages/CustomerPortalPage.tsx",
+        "frontend/src/pages/LandingPage.tsx",
+        "frontend/src/pages/VendorPortalPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-the-customer-user-portal-ui-to-browse-nearby-vendors-on-a-free-street-map-and-via-a-list-view-with-interactive-vendor-detail-panels-vendor-info-menu-items-price-range-hours-and-directions-link",
+      "featureTitle": "Implement the Customer/User portal UI to browse nearby vendors on a free street map and via a list view, with interactive vendor detail panels (vendor info, menu items, price range, hours, and directions link).",
+      "files": [
+        "frontend/src/components/customer/CustomerBrowseView.tsx",
+        "frontend/src/components/customer/VendorDetailPanel.tsx",
+        "frontend/src/components/customer/VendorList.tsx",
+        "frontend/src/components/map/OsmVendorMap.tsx",
+        "frontend/src/pages/CustomerPortalPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-the-vendor-portal-ui-that-allows-a-vendor-to-create-and-manage-their-vendor-profile-and-menu-add-edit-remove-menu-items-and-set-a-map-location",
+      "featureTitle": "Implement the Vendor portal UI that allows a vendor to create and manage their vendor profile and menu (add/edit/remove menu items and set a map location).",
+      "files": [
+        "frontend/src/components/auth/VendorGate.tsx",
+        "frontend/src/components/vendor/LocationPicker.tsx",
+        "frontend/src/components/vendor/MenuItemsEditor.tsx",
+        "frontend/src/components/vendor/VendorDashboard.tsx",
+        "frontend/src/components/vendor/VendorProfileForm.tsx",
+        "frontend/src/pages/VendorPortalPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-wire-the-frontend-to-the-backend-using-react-query-for-data-fetching-caching-including-loading-states-empty-states-and-basic-error-handling-for-all-primary-screens",
+      "featureTitle": "Wire the frontend to the backend using React Query for data fetching/caching, including loading states, empty states, and basic error handling for all primary screens.",
+      "files": [
+        "frontend/src/components/AppLayout.tsx",
+        "frontend/src/components/customer/CustomerBrowseView.tsx",
+        "frontend/src/components/states/EmptyState.tsx",
+        "frontend/src/components/states/ErrorState.tsx",
+        "frontend/src/components/states/LoadingState.tsx",
+        "frontend/src/components/vendor/VendorDashboard.tsx",
+        "frontend/src/hooks/mutations/useVendorMutations.ts",
+        "frontend/src/hooks/queries/useAuthProfile.ts",
+        "frontend/src/hooks/queries/useVendors.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-coherent-modern-visual-theme-for-localbuddy-colors-typography-spacing-and-component-styling-that-feels-friendly-and-accessible-for-students-and-newcomers-and-apply-it-consistently-across-landing-customer-and-vendor-portals",
+      "featureTitle": "Add a coherent, modern visual theme for LocalBuddy (colors, typography, spacing, and component styling) that feels friendly and accessible for students and newcomers, and apply it consistently across landing, Customer, and Vendor portals.",
+      "files": [
+        "frontend/src/components/AppLayout.tsx",
+        "frontend/src/index.css",
+        "frontend/src/pages/LandingPage.tsx",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-generated-static-brand-assets-and-use-them-in-the-ui-logo-and-a-hero-illustration-by-placing-them-under-frontend-public-assets-generated-and-referencing-them-directly-from-the-frontend",
+      "featureTitle": "Add generated static brand assets and use them in the UI (logo and a hero illustration) by placing them under frontend/public/assets/generated and referencing them directly from the frontend.",
+      "files": [
+        "frontend/src/components/AppLayout.tsx",
+        "frontend/src/pages/LandingPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

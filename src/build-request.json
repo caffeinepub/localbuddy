@@ -1,0 +1,153 @@
+{
+  "kind": "build_request",
+  "title": "LocalBuddy: Customer and Vendor portals with map-based vendor discovery",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create a LocalBuddy frontend information architecture with two clear entry points: (1) Customer/User portal and (2) Vendor portal, including a simple landing page that explains the service and routes users into the correct portal.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "create two components one for customer or user and another form vendors the website name is localbuddy website"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Landing page displays the name “LocalBuddy” and has two prominent actions: “I’m a Customer” and “I’m a Vendor”.",
+        "Customer and Vendor portals are accessible via routes and via navigation without page reloads.",
+        "All user-facing copy is in English."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement the Customer/User portal UI to browse nearby vendors on a free street map and via a list view, with interactive vendor detail panels (vendor info, menu items, price range, hours, and directions link).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "it is like street vendor to the customer directly usinh the free street map"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Customer portal shows a map view using free street map tiles (e.g., OpenStreetMap) and a vendor list view.",
+        "Selecting a vendor in the list highlights it on the map and opens a detail panel.",
+        "Customer portal supports basic search/filter controls (at minimum: text search and category/food type).",
+        "Vendor locations render as markers/pins on the map."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Implement the Vendor portal UI that allows a vendor to create and manage their vendor profile and menu (add/edit/remove menu items and set a map location).",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "create two components one for customer or user and another form vendors"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Vendor portal provides a form to create/update vendor profile fields (at minimum: name, description, food category, hours, price range).",
+        "Vendor portal provides CRUD UI for menu items (at minimum: item name, description, price).",
+        "Vendor portal includes a map-based location picker to set/update vendor coordinates.",
+        "Changes persist via the Motoko backend and are visible in the Customer portal after refresh."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Add a Motoko backend data model and APIs to store vendor profiles, vendor locations (latitude/longitude), and menu items, and to query vendors for the Customer portal.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "provide the service to the student and new people comes form the new cities"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend exposes query method(s) to list vendors and get vendor details (including menu and location).",
+        "Backend exposes update method(s) for vendors to create/update their vendor profile and menu.",
+        "Backend stores data stably so it remains after canister upgrade (use stable storage patterns as needed)."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Wire the frontend to the backend using React Query for data fetching/caching, including loading states, empty states, and basic error handling for all primary screens.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "please create the interface very high level and very interactive level for efficent more looking good"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All vendor list/detail and vendor management screens show a loading indicator during fetch.",
+        "Empty states are shown when there are no vendors / no menu items.",
+        "Errors from backend calls are surfaced in the UI in a user-friendly way."
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Add a coherent, modern visual theme for LocalBuddy (colors, typography, spacing, and component styling) that feels friendly and accessible for students and newcomers, and apply it consistently across landing, Customer, and Vendor portals.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "very high level and very interactive level for efficent more looking good"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A single consistent theme is evident across all pages (navigation, buttons, cards, forms, panels).",
+        "Theme does not use a blue/purple primary palette by default.",
+        "Layouts are responsive for mobile and desktop."
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Add generated static brand assets and use them in the UI (logo and a hero illustration) by placing them under frontend/public/assets/generated and referencing them directly from the frontend.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "the website name is localbuddy website"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Generated images exist under frontend/public/assets/generated and are referenced by the landing page UI.",
+        "Logo is used in the header/landing area without requiring backend image serving."
+      ]
+    }
+  ],
+  "constraints": [
+    "Use English for any user-facing text.",
+    "Backend must remain a single Motoko actor (all logic in backend/main.mo).",
+    "Do not edit files under frontend/src/components/ui (compose them instead).",
+    "Do not edit immutable hook/bootstrap files (frontend/src/hooks/useInternetIdentity.ts / .tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx)."
+  ],
+  "nonGoals": [
+    "Payments, subscriptions, or tipping flows.",
+    "External database integration (PostgreSQL/MySQL/MongoDB/Redis) or third-party hosting dependencies.",
+    "Real-time tracking or live location sharing (no websockets/real-time chat).",
+    "Social login providers other than Internet Identity."
+  ],
+  "imageRequirements": {
+    "required": [
+      "LocalBuddy wordmark logo, warm earthy palette, simple readable typography (localbuddy-logo.dim_512x256.png)",
+      "Friendly hero illustration of a street-food stall and diverse customers in a simple flat style (localbuddy-hero.dim_1600x900.png)"
+    ],
+    "edits": []
+  }
+}

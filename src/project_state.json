@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "LocalBuddy website to connect students/migrants/low-income users with local street-food vendors, using a free street map; includes separate user and vendor components with a high-level interactive interface.",
+  "architectural_notes": [
+    "Product concept: direct street-vendor-to-customer discovery for affordable food targeting students, migrants, and newcomers to a city.",
+    "Core UX split: separate customer/user experience and vendor experience.",
+    "Mapping requirement: use a free street map provider for vendor discovery/navigation."
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- LocalBuddy wordmark logo, warm earthy palette, simple readable typography (localbuddy-logo.dim_512x256.png)\n- Friendly hero illustration of a street-food stall and diverse customers in a simple flat style (localbuddy-hero.dim_1600x900.png)",
+  "existing_features": [
+    {
+      "id": "feature-create-a-localbuddy-frontend-information-architecture-with-two-clear-entry-points-1-customer-user-portal-and-2-vendor-portal-including-a-simple-landing-page-that-explains-the-service-and-routes-users-into-the-correct-portal",
+      "title": "Create a LocalBuddy frontend information architecture with two clear entry points: (1) Customer/User portal and (2) Vendor portal, including a simple landing page that explains the service and routes users into the correct portal.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-customer-user-portal-ui-to-browse-nearby-vendors-on-a-free-street-map-and-via-a-list-view-with-interactive-vendor-detail-panels-vendor-info-menu-items-price-range-hours-and-directions-link",
+      "title": "Implement the Customer/User portal UI to browse nearby vendors on a free street map and via a list view, with interactive vendor detail panels (vendor info, menu items, price range, hours, and directions link).",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-vendor-portal-ui-that-allows-a-vendor-to-create-and-manage-their-vendor-profile-and-menu-add-edit-remove-menu-items-and-set-a-map-location",
+      "title": "Implement the Vendor portal UI that allows a vendor to create and manage their vendor profile and menu (add/edit/remove menu items and set a map location).",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-wire-the-frontend-to-the-backend-using-react-query-for-data-fetching-caching-including-loading-states-empty-states-and-basic-error-handling-for-all-primary-screens",
+      "title": "Wire the frontend to the backend using React Query for data fetching/caching, including loading states, empty states, and basic error handling for all primary screens.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-coherent-modern-visual-theme-for-localbuddy-colors-typography-spacing-and-component-styling-that-feels-friendly-and-accessible-for-students-and-newcomers-and-apply-it-consistently-across-landing-customer-and-vendor-portals",
+      "title": "Add a coherent, modern visual theme for LocalBuddy (colors, typography, spacing, and component styling) that feels friendly and accessible for students and newcomers, and apply it consistently across landing, Customer, and Vendor portals.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-generated-static-brand-assets-and-use-them-in-the-ui-logo-and-a-hero-illustration-by-placing-them-under-frontend-public-assets-generated-and-referencing-them-directly-from-the-frontend",
+      "title": "Add generated static brand assets and use them in the UI (logo and a hero illustration) by placing them under frontend/public/assets/generated and referencing them directly from the frontend.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Build LocalBuddy web UI with two main components/portals: Customer/User and Vendor",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Integrate free street map for discovering nearby street vendors and navigating to them",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Create a high-level, interactive, visually polished interface suitable to paste into an existing repo",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Add a Motoko backend data model and APIs to store vendor profiles, vendor locations (latitude/longitude), and menu items, and to query vendors for the Customer portal.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "LocalBuddy",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

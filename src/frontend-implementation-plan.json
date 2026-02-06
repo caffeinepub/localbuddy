@@ -1,0 +1,244 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "LocalBuddy Frontend: Landing + Customer/Vendor Portals with Map Discovery",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Create a landing page and route-based Customer and Vendor portal entry points with SPA navigation.",
+      "acceptanceCriteria": [
+        "Landing page displays the name “LocalBuddy” and has two prominent actions: “I’m a Customer” and “I’m a Vendor”.",
+        "Customer and Vendor portals are accessible via routes and via navigation without page reloads.",
+        "All user-facing copy is in English."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create the app shell and SPA routing for Landing, Customer portal, and Vendor portal. Use the authorization component’s frontend guidance to require login before showing portal data (landing remains public). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/LandingPage.tsx",
+          "operation": "create",
+          "description": "Create the LocalBuddy landing page with clear explanation and two prominent actions routing to Customer and Vendor portals (no page reload). Include brand logo/hero references per REQ-7. Use shadcn-ui components (compose-only) for buttons/cards/typography. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/CustomerPortalPage.tsx",
+          "operation": "create",
+          "description": "Create the Customer portal top-level page container and wire it to shared layout/navigation; actual map/list functionality is handled in REQ-2. Use shadcn-ui components (compose-only). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/VendorPortalPage.tsx",
+          "operation": "create",
+          "description": "Create the Vendor portal top-level page container and wire it to shared layout/navigation; vendor management UI is handled in REQ-3. Use shadcn-ui components (compose-only). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/AppLayout.tsx",
+          "operation": "create",
+          "description": "Create a shared layout with header (logo + navigation) and consistent spacing for Landing, Customer, and Vendor portals. Include a login/logout control using the authorization component’s recommended Login UI pattern. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/auth/AuthGate.tsx",
+          "operation": "create",
+          "description": "Create an authentication gate that blocks portal content until the user is logged in (per authorization component guidance) and shows an AccessDenied/please-login screen when unauthenticated. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Implement the Customer portal map + list vendor browsing UI with detail panel, markers, and basic search/filter.",
+      "acceptanceCriteria": [
+        "Customer portal shows a map view using free street map tiles (e.g., OpenStreetMap) and a vendor list view.",
+        "Selecting a vendor in the list highlights it on the map and opens a detail panel.",
+        "Customer portal supports basic search/filter controls (at minimum: text search and category/food type).",
+        "Vendor locations render as markers/pins on the map."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/customer/CustomerBrowseView.tsx",
+          "operation": "create",
+          "description": "Create the Customer browse experience combining search/filter controls, vendor list, and a map panel. Compose shadcn-ui components (e.g., Input, Select/Combobox if available, Card, Sheet/Drawer for details). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/customer/VendorList.tsx",
+          "operation": "create",
+          "description": "Create a selectable vendor list view with highlight/active styling and callbacks to select a vendor (drives map marker highlight and detail panel). Use shadcn-ui list/card primitives (compose-only). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/customer/VendorDetailPanel.tsx",
+          "operation": "create",
+          "description": "Create an interactive vendor detail panel showing vendor info, menu items, price range, hours (if present), and a directions link (e.g., opens external maps using vendor coordinates). Use shadcn-ui components (compose-only). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/map/OsmVendorMap.tsx",
+          "operation": "create",
+          "description": "Create a map component using free street map tiles (OpenStreetMap) that renders vendor markers and supports highlighting the selected vendor marker. (If using Leaflet/react-leaflet, ensure required CSS/assets are wired in the frontend build.) Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/CustomerPortalPage.tsx",
+          "operation": "modify",
+          "description": "Wire CustomerBrowseView into the Customer portal page, ensuring selection state is shared between list/map/detail panel (no full-page reload). Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Implement Vendor portal UI for managing vendor profile, menu CRUD, and selecting a map location, wired to backend calls.",
+      "acceptanceCriteria": [
+        "Vendor portal provides a form to create/update vendor profile fields (at minimum: name, description, food category, hours, price range).",
+        "Vendor portal provides CRUD UI for menu items (at minimum: item name, description, price).",
+        "Vendor portal includes a map-based location picker to set/update vendor coordinates.",
+        "Changes persist via the Motoko backend and are visible in the Customer portal after refresh."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/vendor/VendorDashboard.tsx",
+          "operation": "create",
+          "description": "Create the Vendor portal main view with sections/tabs for Profile, Menu, and Location. Compose shadcn-ui components (Tabs, Card, Button, Form inputs) without editing frontend/src/components/ui. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/vendor/VendorProfileForm.tsx",
+          "operation": "create",
+          "description": "Create a vendor profile form (name, description, food category, hours, price range) bound to backend profile data. Include save/update actions and validation messaging using shadcn-ui components (compose-only). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/vendor/MenuItemsEditor.tsx",
+          "operation": "create",
+          "description": "Create CRUD UI for menu items (add/edit/remove, including item name/description/price, and optionally availability). Use shadcn-ui Dialog/Drawer patterns for editing and Card/Table layouts for lists (compose-only). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/vendor/LocationPicker.tsx",
+          "operation": "create",
+          "description": "Create a map-based location picker (OpenStreetMap tiles) that lets the vendor place/move a pin to set coordinates and save them. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/auth/VendorGate.tsx",
+          "operation": "create",
+          "description": "Create a vendor-only guard that checks the caller’s profile/role (via backend calls exposed in the generated actor) and blocks Vendor portal access if the user is not a vendor. Show a clear English message and guidance. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/VendorPortalPage.tsx",
+          "operation": "modify",
+          "description": "Wire VendorGate + VendorDashboard into the Vendor portal route so only authenticated vendors can manage vendor data; ensure SPA navigation remains intact. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Wire primary screens to the backend with React Query, including loading/empty/error states.",
+      "acceptanceCriteria": [
+        "All vendor list/detail and vendor management screens show a loading indicator during fetch.",
+        "Empty states are shown when there are no vendors / no menu items.",
+        "Errors from backend calls are surfaced in the UI in a user-friendly way."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/queries/useVendors.ts",
+          "operation": "create",
+          "description": "Create React Query hooks for vendor browsing (list vendors, fetch vendor detail) using the existing actor from frontend/src/hooks/useActor.ts. Ensure queries are enabled only when the actor is available. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/mutations/useVendorMutations.ts",
+          "operation": "create",
+          "description": "Create React Query mutation hooks for vendor management flows (upsert vendor profile, add/update/remove menu items, update vendor location), including cache invalidation to refresh Customer portal data after changes. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/queries/useAuthProfile.ts",
+          "operation": "create",
+          "description": "Create React Query hooks for authorization-related calls (getCallerUserProfile, saveCallerUserProfile, getCallerUserRole/isCallerAdmin if needed) following the authorization component guidance (avoid profile setup modal flash, clear cache on logout). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/states/LoadingState.tsx",
+          "operation": "create",
+          "description": "Create a reusable loading UI (spinner/skeleton) used across Customer and Vendor portals while React Query is fetching. Use shadcn-ui Skeleton components if available (compose-only). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/states/EmptyState.tsx",
+          "operation": "create",
+          "description": "Create a reusable empty state component for 'no vendors' and 'no menu items' conditions, with clear English copy and optional action prompts. Use shadcn-ui components (compose-only). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/states/ErrorState.tsx",
+          "operation": "create",
+          "description": "Create a reusable error presentation component for backend/authorization failures, with user-friendly English copy and a retry action where appropriate. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/customer/CustomerBrowseView.tsx",
+          "operation": "modify",
+          "description": "Connect Customer browsing UI to React Query hooks; add loading/empty/error states for vendor list and vendor detail panel. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/vendor/VendorDashboard.tsx",
+          "operation": "modify",
+          "description": "Connect Vendor management UI to React Query hooks; add loading/empty/error states for vendor profile and menu management. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/AppLayout.tsx",
+          "operation": "modify",
+          "description": "Ensure logout clears all cached React Query data (per authorization component guidance) and that navigation reflects authenticated/unauthenticated state. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Apply a coherent, modern, friendly theme (non blue/purple primary) with responsive layouts across landing and portals.",
+      "acceptanceCriteria": [
+        "A single consistent theme is evident across all pages (navigation, buttons, cards, forms, panels).",
+        "Theme does not use a blue/purple primary palette by default.",
+        "Layouts are responsive for mobile and desktop."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Create global styling with Tailwind base layers and CSS variables for a warm, earthy palette (avoid blue/purple as primary), consistent typography, spacing, and accessible contrast."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Adjust Tailwind theme extensions (if needed) to support the LocalBuddy warm palette, consistent radii/shadows, and responsive container defaults without introducing a blue/purple primary by default."
+        },
+        {
+          "path": "frontend/src/components/AppLayout.tsx",
+          "operation": "modify",
+          "description": "Apply consistent responsive layout structure (header, content max-width, mobile nav behavior) and consistent component styling using Tailwind + shadcn-ui compositions. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/LandingPage.tsx",
+          "operation": "modify",
+          "description": "Ensure landing page uses the shared theme (hero, cards, buttons) with responsive behavior for mobile/desktop and accessible spacing/typography. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Add generated static brand assets (logo and hero) under frontend/public/assets/generated and reference them from the landing UI.",
+      "acceptanceCriteria": [
+        "Generated images exist under frontend/public/assets/generated and are referenced by the landing page UI.",
+        "Logo is used in the header/landing area without requiring backend image serving."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/localbuddy-logo.dim_512x256.png",
+          "operation": "create",
+          "description": "Add the generated LocalBuddy wordmark logo asset as a static file at the exact path frontend/public/assets/generated/localbuddy-logo.dim_512x256.png."
+        },
+        {
+          "path": "frontend/public/assets/generated/localbuddy-hero.dim_1600x900.png",
+          "operation": "create",
+          "description": "Add the generated hero illustration asset as a static file at the exact path frontend/public/assets/generated/localbuddy-hero.dim_1600x900.png."
+        },
+        {
+          "path": "frontend/src/pages/LandingPage.tsx",
+          "operation": "modify",
+          "description": "Reference frontend/public/assets/generated/localbuddy-logo.dim_512x256.png and frontend/public/assets/generated/localbuddy-hero.dim_1600x900.png directly from the landing page UI (no backend image serving). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/AppLayout.tsx",
+          "operation": "modify",
+          "description": "Use frontend/public/assets/generated/localbuddy-logo.dim_512x256.png in the header/brand area consistently across portals. Verify the component's usage instructions before implementing."
+        }
+      ]
+    }
+  ]
+}
